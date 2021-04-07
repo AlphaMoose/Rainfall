@@ -28,7 +28,8 @@ class Settings():
         self.coordinate_resolution = 128 # Default coordinate plane resolution
         self.bg_color = (30,30,30)
         self.text_color = (250,250,250)
-        self.font = pygame.font.Font("fonts/VT323-Regular.ttf", 48)
+        self.font_size = 48
+        self.font = pygame.font.Font("fonts/VT323-Regular.ttf", self.font_size)
         self.tile_color = (90,90,90)
         self.tile_width = (self.screen_width / self.coordinate_resolution) - (0.25 * (self.screen_width / self.coordinate_resolution))
         self.tile_height = (self.screen_height / self.coordinate_resolution) - (0.25 * (self.screen_height / self.coordinate_resolution))
