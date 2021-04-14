@@ -25,7 +25,7 @@ class Settings():
         self.screen_width = int(1.25 * self.screen_height)
         self.screen_size = (self.screen_width, self.screen_height)
         self.resizable = pygame.RESIZABLE
-        self.coordinate_resolution = 128 # Default coordinate plane resolution
+        self.coordinate_resolution = 16 # Default coordinate plane resolution
         self.bg_color = (30,30,30)
         self.text_color = (250,250,250)
         self.font_size = 48
@@ -35,7 +35,7 @@ class Settings():
         self.tile_height = (self.screen_height / self.coordinate_resolution) - (0.25 * (self.screen_height / self.coordinate_resolution))
 
         # Other simulation settings
-        self.cloudmap_resolution = self.coordinate_resolution - int(.25 * self.coordinate_resolution)
+        self.cloudmap_resolution = self.coordinate_resolution# - int(.25 * self.coordinate_resolution)
         self.rain_density = 75
         self.roof_size = 4
         self.roof_angle = 45

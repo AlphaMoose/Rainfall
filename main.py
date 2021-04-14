@@ -27,6 +27,7 @@ from settings import Settings
 from Text import Text
 from Tile import Tile
 from Roof import Roof
+from Button import Button
 
 # Cycle
 #def cycle(roof_angle, roof_size, diameter, dps, wind, cloud_cover):
@@ -48,14 +49,14 @@ def main():
     cloudmap_resolution = settings.cloudmap_resolution
     seed = random.randint(50,200)
     print(seed)
-    clouds = Cloudmap(seed, cloudmap_resolution)
+    clouds = Cloudmap(seed, cloudmap_resolution, settings)
     clouds.generate()
 
     #roof = Roof(settings.roof_size, settings.coordinate_resolution / 2, 1, settings.roof_angle)
 
     # Display cloudmap
     for i in range(0,cloudmap_resolution+1):
-        for j in range(0, cloudmap_resolution+1):
+        for j in range(0, settings.roof_size+1):
             n = clouds.getValue(j,i)
             if n == 1:
                 functions.makeTile("", screen, settings, queue, (j,i), "WHITE")

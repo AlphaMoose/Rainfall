@@ -19,9 +19,10 @@ import random
 import math
 
 class Cloudmap():
-    def __init__(self, seed, cloudmap_resolution):
+    def __init__(self, seed, cloudmap_resolution, settings):
         self.seed = seed # Must be an integer greater than 1
         self.cloudmap_resolution = cloudmap_resolution
+        self.settings = settings
         self.map = []
 
     def generate(self): # Function to generate a cloudmap
@@ -32,8 +33,8 @@ class Cloudmap():
         # Iterate over the area to produce 2d list to represent cloud cover
         for i in range(0, self.cloudmap_resolution):
             row = []
-            for j in range(0, self.cloudmap_resolution):
-                # Generate random number
+            for j in range(0, self.settings.roof_size):
+                # Generate random
                 n = random.random()
 
                 # If n is within range of threshold median, that space has a cloud over it
