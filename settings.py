@@ -11,6 +11,9 @@
 #
 # Description: All settings for the game 2048
 import pygame
+import random
+import math
+from math import *
 
 class Settings():
     def __init__(self):
@@ -25,7 +28,7 @@ class Settings():
         self.screen_width = int(1.25 * self.screen_height)
         self.screen_size = (self.screen_width, self.screen_height)
         self.resizable = pygame.RESIZABLE
-        self.coordinate_resolution = 16 # Default coordinate plane resolution
+        self.coordinate_resolution = 600 # Default coordinate plane resolution
         self.bg_color = (30,30,30)
         self.text_color = (250,250,250)
         self.font_size = 48
@@ -35,10 +38,12 @@ class Settings():
         self.tile_height = (self.screen_height / self.coordinate_resolution) - (0.25 * (self.screen_height / self.coordinate_resolution))
 
         # Other simulation settings
-        self.cloudmap_resolution = self.coordinate_resolution# - int(.25 * self.coordinate_resolution)
-        self.rain_density = 75
-        self.roof_size = 4
-        self.roof_angle = 45
+        self.cloudmap_resolution = self.coordinate_resolution
+        self.rain_density = 1.0 # Drops / meter^2
+        self.roof_size = random.randrange(7,15) # Meters, values chosen because their squares fall within the range of average house sizes in Kabul, Afghanistan
+        self.cycle_length = 1 # Seconds
+        self.drop_volume = .0005 # Liters
+        self.average_annual_rainfall = 0.327 # Meters / meter^2
 
 
 

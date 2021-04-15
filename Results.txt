@@ -1,0 +1,3 @@
+Accumulated water: 480100.0
+Water per person in 8-member household: 600.125
+Days of water: 10.171610169491526

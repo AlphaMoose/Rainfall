@@ -18,56 +18,46 @@
 # Take user arguments for roof angle, roof size, Initial drop diameter median, Drops per second median, Duration of rainstorm, Initial wind velocity, Cloud cover seed
 
 # Imports
-import math
 import random
 from Cloudmap import Cloudmap
-import pygame,sys,os,statistics
-import functions
 from settings import Settings
-from Text import Text
-from Tile import Tile
-from Roof import Roof
-from Button import Button
 
 # Cycle
-#def cycle(roof_angle, roof_size, diameter, dps, wind, cloud_cover):
-    # Change each cycle:
-        # Wind velocity
-            # 10(sin(x)/x) ?
-            # Each cycle randomly decide how much remaining duration the wind has, favor dying out
-        # Number of drops hitting roof
-            # Random number within range from drops per second median
-        # Median drop diameter
-            # Random number within range from drop diameter
-
-def main():
+def cycle():
     # Initialize simulation
-    pygame.init()
     settings = Settings()
-    screen = functions.makeScreen("Cloudmap", settings.screen_size, "Images/icon.png", settings.resizable)
-    queue = []
     cloudmap_resolution = settings.cloudmap_resolution
     seed = random.randint(50,200)
-    print(seed)
     clouds = Cloudmap(seed, cloudmap_resolution, settings)
     clouds.generate()
 
-    #roof = Roof(settings.roof_size, settings.coordinate_resolution / 2, 1, settings.roof_angle)
+    # Initialize accumulated drops at 0
+    drops = 0
+    # Iterate over cloudmap, add collected drops for each cloud-covered section of roof
+    for row in clouds.map:
+        for i in row:
+            if i == 1:
+                drops += settings.rain_density * settings.cycle_length
 
-    # Display cloudmap
-    for i in range(0,cloudmap_resolution+1):
-        for j in range(0, settings.roof_size+1):
-            n = clouds.getValue(j,i)
-            if n == 1:
-                functions.makeTile("", screen, settings, queue, (j,i), "WHITE")
-            else:
-                functions.makeTile("", screen, settings, queue, (j,i), "BLACK")
+    return drops
 
-    # Cycle
-    while True:
-        functions.checkEvents(clouds.getMap())
+def main():
+    # Initialize accumulated water to 0
+    water = 0
+    # Perform 100 cycles to represent 100 roofs, new roof dimensions and cloudmap each cycle
+    for j in range(0, 100):
+        # Increase water by amount collected by the current roof
+        water += cycle()
 
-        functions.updateScreen(screen, settings, queue)
+    # Output results
+    """file = open("Results.txt", "a+")
+    file.write("Accumulated water: {0}\n".format(water))
+    file.write("Water per person in 8-member household: {0}\n".format(water / 800))
+    file.write("Days of water: {0}\n".format((water / 800) / 59))
+    file.close()"""
+    print("\nDuring the simulated rainstorm which lasted 10 hours, among 100 houses of random sizes within the range of the average roof size in Kabul, {0} L of water was collected.".format(water))
+
+    print("If each house has Afghanistan's average number of people living in it, which is 8, then this amount of water would provide {0} L of water per person, enough for {1} days.".format(water / 800, (water / 800) / 59))
 
 main()
 
