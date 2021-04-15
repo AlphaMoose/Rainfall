@@ -50,11 +50,11 @@ def main():
         water += cycle()
 
     # Output results
-    """file = open("Results.txt", "a+")
+    file = open("Results.txt", "a+")
     file.write("Accumulated water: {0}\n".format(water))
     file.write("Water per person in 8-member household: {0}\n".format(water / 800))
     file.write("Days of water: {0}\n".format((water / 800) / 59))
-    file.close()"""
+    file.close()
     print("\nDuring the simulated rainstorm which lasted 10 hours, among 100 houses of random sizes within the range of the average roof size in Kabul, {0} L of water was collected.".format(water))
 
     print("If each house has Afghanistan's average number of people living in it, which is 8, then this amount of water would provide {0} L of water per person, enough for {1} days.".format(water / 800, (water / 800) / 59))
